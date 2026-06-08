@@ -1,10 +1,3 @@
-mod ast;
-pub mod compiler;
-pub mod lang;
-pub mod parser;
-pub mod runtime;
-pub mod stdlib;
-
 use std::fs;
 use std::io::{BufReader, BufWriter};
 use std::path::Path;
@@ -17,16 +10,18 @@ use gs_core::core::types::BooleanType;
 use gs_core::debug::DebugInfo;
 use gs_core::program::{GvmProgram, GvmProgramSerializer, NativeMethodFactory};
 
-use crate::compiler::GScriptCompiler;
-use crate::lang::exception_handler::GscriptExceptionHandler;
-use crate::lang::types::array_type::ArrayType;
-use crate::lang::types::number::NumberType;
-use crate::lang::types::object_type::ObjectType;
-use crate::lang::types::native_object_type::NativeObjectType;
-use crate::lang::types::string_type::StringType;
-use crate::lang::value_converter::GscriptValueConverter;
-use crate::parser::Parser;
-use crate::runtime::NativeStaticMethodWrapper;
+use gs_lang::ast;
+use gs_lang::compiler::GScriptCompiler;
+use gs_lang::lang::exception_handler::GscriptExceptionHandler;
+use gs_lang::lang::types::array_type::ArrayType;
+use gs_lang::lang::types::number::NumberType;
+use gs_lang::lang::types::object_type::ObjectType;
+use gs_lang::lang::types::native_object_type::NativeObjectType;
+use gs_lang::lang::types::string_type::StringType;
+use gs_lang::lang::value_converter::GscriptValueConverter;
+use gs_lang::parser::Parser;
+use gs_lang::runtime::NativeStaticMethodWrapper;
+use gs_lang::stdlib;
 
 fn create_registry() -> Arc<NativeRegistry> {
     let mut registry = NativeRegistry::new();
